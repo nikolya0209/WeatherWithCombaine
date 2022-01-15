@@ -13,12 +13,11 @@ enum WeatherError: Error {
 }
 
 class ViewController: UIViewController {
-    
-    
+
     private let celsiusCharacters = "°С"
     private let openWeatherBaseURL = "https://api.openweathermap.org/data/2.5/weather"
     private let openWeatherAPIKey = "2fde583d9bff183c3d658143a82b5cfb"
-
+    
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
@@ -30,14 +29,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         activityIndicatorView.isHidden = true
     }
-
+    
     @IBAction func searchTap(_ sender: Any) {
         view.endEditing(true)
-        
         guard let cityName = cityTextField.text else { return }
         getTemperature(for: cityName)
     }
-    
     
     private func getTemperature(for cityName: String) {
         guard let weatherURL = URL(string: "\(openWeatherBaseURL)?q=\(cityName)&appid=\(openWeatherAPIKey)&units=metric") else { return }
@@ -66,6 +63,5 @@ class ViewController: UIViewController {
                 self.temperatureLabel.text = "Temperature is: \(temp)"
             })
     }
-    
 }
 
